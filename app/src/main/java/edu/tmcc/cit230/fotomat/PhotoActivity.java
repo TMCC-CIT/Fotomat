@@ -1,6 +1,5 @@
 package edu.tmcc.cit230.fotomat;
 
-import android.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -9,13 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,7 +33,7 @@ public class PhotoActivity extends AppCompatActivity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
-    private static final boolean AUTO_HIDE = true;
+    private static final boolean AUTO_HIDE = false;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -98,13 +95,13 @@ public class PhotoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_photo);
+        setContentView(edu.tmcc.cit230.fotomat.R.layout.activity_photo);
 
         mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
+        mControlsView = findViewById(edu.tmcc.cit230.fotomat.R.id.fullscreen_content_controls);
 
 
-        mImageView = (ImageView) findViewById(R.id.photo_view);
+        mImageView = (ImageView) findViewById(edu.tmcc.cit230.fotomat.R.id.photo_view);
 
         // Set up the user interaction to manually show or hide the system UI.
         mImageView.setOnClickListener(new View.OnClickListener() {
@@ -114,11 +111,8 @@ public class PhotoActivity extends AppCompatActivity {
             }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.take_picture_button).setOnTouchListener(mDelayHideTouchListener);
-        findViewById(R.id.take_picture_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(edu.tmcc.cit230.fotomat.R.id.take_picture_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(edu.tmcc.cit230.fotomat.R.id.take_picture_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
@@ -179,44 +173,11 @@ public class PhotoActivity extends AppCompatActivity {
 
     static final int REQUEST_TAKE_PHOTO = 1;
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                Log.d(TAG, "Unable to create image file", ex);
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
-        }
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            galleryAddPic();
-            setPic();
-            Intent result = new Intent();
-            result.putExtra(EXTRA_PHOTO_URL, mCurrentPhotoPath);
-            setResult(RESULT_OK, result);
-        }
-        else {
-            setResult(RESULT_CANCELED);
-        }
-    }
-
-    String mCurrentPhotoPath;
     // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {

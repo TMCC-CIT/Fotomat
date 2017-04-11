@@ -3,7 +3,6 @@ package edu.tmcc.cit230.fotomat;
 import android.location.Location;
 import android.os.Handler;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.model.LatLng;
 
