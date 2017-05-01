@@ -22,7 +22,7 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="460dp"
-            tools:context="edu.tmcc.cit230.fotomat.MapsActivity" />
+            tools:context="edu.tmcc.cit128.fotomat.MapsActivity" />
 
     </LinearLayout>
 

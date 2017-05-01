@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
-    tools:context="edu.tmcc.cit230.fotomat.PhotoActivity">
+    tools:context="edu.tmcc.cit128.fotomat.PhotoActivity">
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->

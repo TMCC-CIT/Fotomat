@@ -1,4 +1,5 @@
-package edu.tmcc.cit230.fotomat;
+package edu.tmcc.cit128.fotomat;
+
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("edu.tmcc.cit230.fotomat", appContext.getPackageName());
+        assertEquals("edu.tmcc.cit128.fotomat", appContext.getPackageName());
     }
 }

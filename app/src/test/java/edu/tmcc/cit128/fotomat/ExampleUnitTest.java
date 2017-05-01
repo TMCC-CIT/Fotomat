@@ -1,4 +1,4 @@
-package edu.tmcc.cit230.fotomat;
+package edu.tmcc.cit128.fotomat;
 
 import org.junit.Test;
 
